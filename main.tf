@@ -15,8 +15,8 @@ provider "google" {
 locals {
   instructor_vpc_self_link = "https://www.googleapis.com/compute/v1/projects/${var.project_id}/global/networks/instructor-vpc"
   team_zone                = (var.team_id - 1) % 3
-  jumphost_zone            = coalesce(var.jumphost_zone, data.google_compute_zones.available.names[local.team_zone])
-  primary_zone             = coalesce(var.primary_zone, data.google_compute_zones.available.names[local.team_zone])
+  jumphost_zone            = "europe-north2-a"
+  primary_zone             = "europe-north2-a"
   subnet_cidr              = "10.0.${var.team_id}.0/24"
 }
 
