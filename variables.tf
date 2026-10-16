@@ -6,7 +6,7 @@ variable "project_id" {
 variable "region" {
   description = "The Google Cloud region"
   type        = string
-  default     = "europe-north2-a"
+  default     = "europe-north2"
 }
 
 variable "jumphost_zone" {
