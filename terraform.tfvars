@@ -1,12 +1,8 @@
-project_id  = "itsx25-lab"
+project_id  = "itsx25-comerit"
 team_id     = 6
 github_repo = "sud0-squad/blueteam"
 
 ssh_users = [
-  {
-    username   = "dehe"
-    public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILYqu1F6xW942A1Pn82NPeZQBsLEB2yqOK2bdbwkVzna"
-  },
   {
     username   = "danielwchas"
     public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILAqJNuWQX/iwtPu2LNMBDX4ileUc9KAihdo/4/9+9lZ"
