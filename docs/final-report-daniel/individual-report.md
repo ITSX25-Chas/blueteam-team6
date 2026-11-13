@@ -2,7 +2,9 @@
 **Namn:** Daniel Wagenius
 **Projekt/team:** Team 6
 **Datum:** 2026-11-13
+
 ---
+
 ## Syfte och kursmål
 I rapporten ska du sammanställa projektets resultat och dina egna reflektioner för en fiktiv ledningsgrupp. Du ska omsätta tekniskt säkerhetsarbete till mätbar
 uppföljning, förbättringsarbete och prioriterade rekommendationer. Du ska också
@@ -16,6 +18,7 @@ ledningsnivå.
 - **Kursmål 13:** självständigt leda och leverera ett komplext säkerhetsprojekt med kvalitet, dokumentation och professionell kommunikation.
 Bedömningen utgår från målgruppsanpassning, källanvändning, struktur, motivering
 och din förmåga att visa förståelse för helheten.
+
 ---
 
 ## 1. Professionell sammanfattning
@@ -28,6 +31,7 @@ Sammanfatta:
 - viktigaste rekommendationerna,
 - vilka beslut eller prioriteringar som behövs.
 **Omfattning:** cirka 200–300 ord.
+
 ---
 
 ## 2. Kontext och avgränsning
@@ -35,6 +39,7 @@ Vårt projekt var ett penetrationstest mot en målmiljö med en webbtjänst och 
 Vi gick igenom webbtjänstens användargränssnitt för att försöka hitta en väg in. När vi väl vara inne kunde vi utforska serverns interna system med hjälp av administrationsverktyget som vi fick tillgång till.
 Målmiljön var endast webbtjänsten som körde på IP-adressen vi blev tilldelade. Vi fick inte gå utanför den och röra andra teams målmiljöer. När vi hade tillgång fick vi inte göra några ändringar eller hindra driften.
 Vi har byggt våra rapporter på resultatet av de tester vi utfört mot målmiljön och observationer av dessa.
+
 ---
 
 ## 3. Mitt individuella bidrag
@@ -43,20 +48,21 @@ Under testet var skärmdelningen hjälpsam för att kunna demonstrera teknikerna
 Jag hoppas att det var värdefullt för övriga medlemmar och att de har förstått processen, och att de hade stoppat mig om det var något de inte förstod och behövde gå in djupare på.
 När vi fastnade var det i huvudsak jag som sökte hjälp av utomstående när vi kände att vi verkligen inte kom vidare.
 Anledningen till att jag fick en ledarroll har troligtvis med att göra att jag har tidigare utbildningar inom mjukvaruutveckling, kan programmera hyggligt och har använt GitHub en del.
+
 ---
 
 ## 4. Viktigaste projektresultat och evidens
 ### Bristande autentisering i inloggningsfunktionen
 Penetrationstestet visade på stora brister i hur indatan behandlades i webbtjänstens inloggningsfunktion. Det är möjligt att kringgå inloggningen utan giltiga inloggningsuppgifter.
 #### Evidens
-Vi har in penetrationstestet demonstrerat hur administratörsinloggningen enkelt kan passeras med en välkänd SQL-injektionsattack i inloggningsformuläret.
+Vi har i penetrationstestet demonstrerat hur administratörsinloggningen enkelt kan passeras med en välkänd SQL-injektionsattack i inloggningsformuläret.
 Se [RedTeam6.pdf](./RedTeam6.pdf) med bilagor.
 #### Verksamhets- och säkerhetsbetydelse
 En angripare kan få full åtkomst till webbtjänsten med administratörsbehörigheter och all data som finns på webbtjänsten. Detta äventyrar hela systemets konfidentialitet och integritet.
+Se [lessons-learned.md](./lessons-learned.md).
 #### Rekommendation
 Prioritet: Omgående, detta är en kritisk sårbarhet.
 DevOps/utvecklingsteamet behöver bygga om inloggningsfunktionen med strikt indatavalidering och parametriserade databasfrågor så att injektioner blockeras.
-Se [lessons-learned.md](./lessons-learned.md).
 
 ### Avsaknad av åtkomstkontroll
 Webbtjänsten saknar tillräcklig behörighets- och åtkomstkontroll på servern och litar blint på informationen från klienten.
@@ -79,7 +85,9 @@ Se [lessons-learned.md](./lessons-learned.md).
 #### Rekommendation
 Prioritet: Omgående.
 DevOps och driftansvariga måste begränsa synligheten och åtkomsten för känsliga delar av webbtjänsten. Det ska krävas VPN eller IP-vitlistning för att komma åt dessa delar. Administrationsverktyget som använts måste byggas om så att det inte kommer åt serverns system.
+
 ---
+
 ## 5. KPI:er och ledningsrapportering
 Sammanfatta de tre KPI:erna från [`kpi.md`](./kpi.md). Beskriv:
 - vilka KPI:er du valde,
@@ -88,7 +96,9 @@ Sammanfatta de tre KPI:erna från [`kpi.md`](./kpi.md). Beskriv:
 - vilka beslut eller prioriteringar de kan stödja,
 - eventuella begränsningar i data eller tolkning.
 Du behöver inte upprepa alla fullständiga definitioner från `kpi.md`.
+
 ---
+
 ## 6. Incidentrespons, post-mortem och förbättringsarbete
 Sammanfatta de viktigaste slutsatserna från [`lessons-learned.md`](./lessons-
 learned.md).
@@ -100,7 +110,9 @@ Beskriv:
 - hur förbättringarna bör följas upp.
 Fokusera på vad organisationen behöver lära sig och förändra, inte bara på
 händelseförloppet.
+
 ---
+
 ## 7. AI i säkerhetsarbetet
 Beskriv och värdera din användning av generativa AI-assistenter och AI-assisterade
 säkerhetsverktyg i projektets arbetsflöde.
@@ -126,7 +138,9 @@ motsvarande yrkesmässigt säkerhetsarbete.]
 **Viktigt:** En verktygslista räcker inte. Du ska självständigt motivera när AI är
 lämpligt eller olämpligt och visa hur du säkerställde kvalitet och ansvar.
 **Omfattning:** cirka 400–600 ord.
+
 ---
+
 ## 8. Prioriterade rekommendationer
 Prioritera ett begränsat antal åtgärder utifrån projektresultat, KPI:er och post-
 mortem.
@@ -138,7 +152,9 @@ För varje rekommendation ska det framgå:
 - vem eller vilken funktion som bör äga nästa steg.
 Undvik en lång önskelista. Fokusera på åtgärder med tydlig säkerhets- och
 verksamhetseffekt.
+
 ---
+
 ## 9. Individuell reflektion
 ### Vad kan jag nu som jag inte kunde när kursen började?
 [Ge minst ett konkret exempel.]
@@ -150,7 +166,9 @@ verksamhetseffekt.
 [Beskriv minst två konkreta saker du kommer att kunna använda.]
 **Omfattning:** cirka 300–500 ord totalt. AI-värderingen görs separat i avsnitt 7
 och behöver inte upprepas här.
+
 ---
+
 ## 10. Källor och referenser
 Lista de källor du faktiskt har använt, exempelvis:
 - standarder och ramverk,
@@ -160,7 +178,9 @@ Lista de källor du faktiskt har använt, exempelvis:
 - AI-genererat material när det har påverkat analysen eller texten.
 Använd ett konsekvent sätt att ange källorna. Det ska gå att skilja mellan externa
 fakta, projektets evidens, AI-genererade förslag och dina egna bedömningar.
+
 ---
+
 ## Slutkontroll
 - [ ] Jag har tydligt beskrivit mitt eget bidrag och länkat till relevant underlag.
 - [ ] Mina viktigaste resultat stöds av evidens och källor.

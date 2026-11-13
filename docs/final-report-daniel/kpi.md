@@ -1,5 +1,7 @@
 # KPI:er och säkerhetsmätningar
+
 ---
+
 ## KPI 1
 ### Säkerhetsefterlevnad i infrastruktur (Configuration Compliance Rate)
 ### Syfte
@@ -19,7 +21,9 @@ Långsiktigt ska målvärdet vara 100%. Det är svårt och tar tid att uppnå. E
 Ska mätas automatiskt vid varje ändring i CI/CD-flödet, samt månadsvis.
 ### Tolkning och åtgärd vid avvikelse
 Ett bra värde (över 95%) betyder att infrastrukturen är säkert uppsatt. Om en allvarlig incident inträffar när värdet är högt kan konsekvenserna hållas nere. Om värdet skulle sjunka ska pipelinen larma och IT-avdelningen måste åtgärda konfigurationen eller den skadliga ändringen.
+
 ---
+
 ## KPI 2
 ### Säkerhetsloggning och övervakning (Security Logging and Monitoring Coverage)
 ### Syfte
@@ -40,7 +44,9 @@ Vid varje ändring av autentisering, inloggning, personaländringar,
 samt kvartalsvis.
 ### Tolkning och åtgärd vid avvikelse
 Ett högt värde visar att företaget har en god överblick över sina system och snabbt kan se om någonting händer. I vår post-mortem-analys såg vi att våra tester lämnade spår i loggarna. Vi kan dock inte med säkerhet säga att precis allt loggades, och om systemen inte larmar så visar loggarna bara vad som har hänt och inte vad som aktivt sker. Om värdet är lågt så har inte företaget tillräcklig övervakning. Oavsett värde i vårt test så bör centraliserad logghantering (SIEM) och automatiska larm införas.
+
 ---
+
 ## KPI 3
 ### Publika och exponerade molnresurser (Publicly Exposed Cloud Resources)
 ### Syfte
@@ -62,7 +68,9 @@ Kontinuerligt via automatiserade skanningar i CI/CD-pipelinen samt månadsvis up
 Ett lågt värde, helst 0, innebär att attackytan är minimerad och obehöriga utifrån har svårt att komma åt tjänsterna.
 Vid avvikelse ökar risken för intrång, vilket vi visar i både Blue Team- och Red Team-rapporterna.
 Pipelinen ska blockera publicering, och om avvikelse upptäcks i drift ska resurserna isoleras omedelbart.
+
 ---
+
 ## Samlad ledningsrapportering
 De tre KPI:erna jag har valt hänger ihop med varandra. Infrastrukturen som beskrivs i KPI 1 säkras upp av KPI 3, och med hjälp av KPI 2 får man en bild av hur hela infrastrukturen övervakas. Tillsammans ger de en heltäckande bild av hur motståndskraftig företagets infrastruktur är. När vi vet hur motståndskraftiga vi är i nuläget kan vi se om vi lever upp till den motståndskraft vi vill ha och behöver.
 
@@ -71,6 +79,7 @@ Företaget bör sträva efter att nå målvärdena på KPI:erna. Efterlevnaden s
 Jag har valt tre KPI:er som täcker infrastrukturen. Det innebär att de inte visar sårbarheter i den mänskliga faktorn, eller sårbarheter i företagets applikationer. För att få en fullständig bild måste även applikationer testas och analyseras, och personalen måste få träning i säkerhetsmedvetenhet.
 
 ---
+
 ## Kontroll före commit
 - [x] Jag har definierat tre relevanta KPI:er.
 - [x] KPI:erna mäter mer än enbart genomförda aktiviteter.
