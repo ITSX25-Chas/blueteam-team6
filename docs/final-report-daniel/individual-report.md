@@ -1,11 +1,10 @@
 # Individuell slutrapport
-**Namn:** [Skriv ditt namn]
-**Projekt/team:** [Ange projekt eller team]
-**Datum:** [ÅÅÅÅ-MM-DD]
+**Namn:** Daniel Wagenius
+**Projekt/team:** Team 6
+**Datum:** 2026-11-13
 ---
 ## Syfte och kursmål
-I rapporten ska du sammanställa projektets resultat och dina egna reflektioner för
-en fiktiv ledningsgrupp. Du ska omsätta tekniskt säkerhetsarbete till mätbar
+I rapporten ska du sammanställa projektets resultat och dina egna reflektioner för en fiktiv ledningsgrupp. Du ska omsätta tekniskt säkerhetsarbete till mätbar
 uppföljning, förbättringsarbete och prioriterade rekommendationer. Du ska också
 värdera när AI är lämpligt eller olämpligt i professionellt säkerhetsarbete.
 Rapporten knyter an till:
@@ -13,13 +12,12 @@ Rapporten knyter an till:
 ledningsnivå.
 - **Kursmål 9:** incidentrespons, post-mortem och förbättringsarbete.
 - **Kursmål 10:** KPI-rapportering för en icke-teknisk beslutsfattare.
-- **Kursmål 11:** integrerad användning och professionell värdering av generativ AI
-och AI-assisterade säkerhetsverktyg.
-- **Kursmål 13:** självständigt leda och leverera ett komplext säkerhetsprojekt med
-kvalitet, dokumentation och professionell kommunikation.
+- **Kursmål 11:** integrerad användning och professionell värdering av generativ AI och AI-assisterade säkerhetsverktyg.
+- **Kursmål 13:** självständigt leda och leverera ett komplext säkerhetsprojekt med kvalitet, dokumentation och professionell kommunikation.
 Bedömningen utgår från målgruppsanpassning, källanvändning, struktur, motivering
 och din förmåga att visa förståelse för helheten.
 ---
+
 ## 1. Professionell sammanfattning
 Skriv rapportens sammanfattning sist, men placera den först. Den ska kunna läsas
 fristående av exempelvis en CISO, IT-chef, systemägare eller ledningsgrupp.
@@ -31,36 +29,56 @@ Sammanfatta:
 - vilka beslut eller prioriteringar som behövs.
 **Omfattning:** cirka 200–300 ord.
 ---
+
 ## 2. Kontext och avgränsning
-Beskriv kort det säkerhetsarbete som rapporten bygger på:
-- vad projektet skulle åstadkomma,
-- vilken miljö eller verksamhet som analyserades,
-- viktiga avgränsningar och antaganden,
-- vilka typer av underlag som användes.
-Undvik en lång kronologisk projektbeskrivning.
-**Omfattning:** cirka 100–150 ord.
+Vårt projekt var ett penetrationstest mot en målmiljö med en webbtjänst och dess tillhörande databas. Testet utfördes för att undersöka webbtjänstens säkerhet och motståndskraft, och hade även potential att visa på regulatoriska brister.
+Vi gick igenom webbtjänstens användargränssnitt för att försöka hitta en väg in. När vi väl vara inne kunde vi utforska serverns interna system med hjälp av administrationsverktyget som vi fick tillgång till.
+Målmiljön var endast webbtjänsten som körde på IP-adressen vi blev tilldelade. Vi fick inte gå utanför den och röra andra teams målmiljöer. När vi hade tillgång fick vi inte göra några ändringar eller hindra driften.
+Vi har byggt våra rapporter på resultatet av de tester vi utfört mot målmiljön och observationer av dessa.
 ---
+
 ## 3. Mitt individuella bidrag
-Beskriv ditt eget arbete och ansvar. Ta med:
-- analyser och tekniska aktiviteter du genomförde,
-- beslut eller prioriteringar du bidrog till,
-- hur du samarbetade med andra roller,
-- vilka artefakter eller resultat som är dina identifierbara bidrag.
-Länka till relevanta commits, filer eller projektartefakter när det är möjligt.
-**Omfattning:** cirka 150–250 ord.
+Jag utsågs inofficiellt till gruppledare. Därför har jag lett teamets möten. Under våra möten har jag varit den som delat skärm och genomfört stora delar av penetrationstestet. Det var fördelaktigt när vi satte upp miljön, då det hindrade dubbelarbete. Därför är de flesta commits från mig. Jag fick ha hand om det mesta av skötseln på vår GitHub.
+Under testet var skärmdelningen hjälpsam för att kunna demonstrera teknikerna för övriga gruppmedlemmar. Till viss del gjorde min skärmdelning att jag såg och visade flaggorna i målmiljön för de andra, även om någon hade utfört samma sak innan mig. Jag hittade bland annat en instruktion för att göra SQL-injektioner i inloggningsfältet.
+Jag hoppas att det var värdefullt för övriga medlemmar och att de har förstått processen, och att de hade stoppat mig om det var något de inte förstod och behövde gå in djupare på.
+När vi fastnade var det i huvudsak jag som sökte hjälp av utomstående när vi kände att vi verkligen inte kom vidare.
+Anledningen till att jag fick en ledarroll har troligtvis med att göra att jag har tidigare utbildningar inom mjukvaruutveckling, kan programmera hyggligt och har använt GitHub en del.
 ---
+
 ## 4. Viktigaste projektresultat och evidens
-Välj 2–4 resultat från projektet som är särskilt viktiga för ledningsgruppen.
-För varje resultat:
-### Resultat
-[Vad identifierades, verifierades eller åstadkoms?]
-### Evidens
-[Vilket underlag stödjer resultatet? Länka till relevanta loggar, konfigurationer,
-analyser eller projektartefakter.]
-### Verksamhets- och säkerhetsbetydelse
-[Vilken risk, konsekvens eller möjlighet innebär resultatet?]
-### Rekommendation
-[Vad bör göras, av vem och med vilken prioritet?]
+### Bristande autentisering i inloggningsfunktionen
+Penetrationstestet visade på stora brister i hur indatan behandlades i webbtjänstens inloggningsfunktion. Det är möjligt att kringgå inloggningen utan giltiga inloggningsuppgifter.
+#### Evidens
+Vi har in penetrationstestet demonstrerat hur administratörsinloggningen enkelt kan passeras med en välkänd SQL-injektionsattack i inloggningsformuläret.
+Se [RedTeam6.pdf](./RedTeam6.pdf) med bilagor.
+#### Verksamhets- och säkerhetsbetydelse
+En angripare kan få full åtkomst till webbtjänsten med administratörsbehörigheter och all data som finns på webbtjänsten. Detta äventyrar hela systemets konfidentialitet och integritet.
+#### Rekommendation
+Prioritet: Omgående, detta är en kritisk sårbarhet.
+DevOps/utvecklingsteamet behöver bygga om inloggningsfunktionen med strikt indatavalidering och parametriserade databasfrågor så att injektioner blockeras.
+Se [lessons-learned.md](./lessons-learned.md).
+
+### Avsaknad av åtkomstkontroll
+Webbtjänsten saknar tillräcklig behörighets- och åtkomstkontroll på servern och litar blint på informationen från klienten.
+#### Evidens
+Vi har visat att en obehörig användare kan få administratörsrättigheter och komma åt skyddade funktioner genom att enbart manipulera rollvärdet i en kaka.
+Se [RedTeam6.pdf](./RedTeam6.pdf) med bilagor.
+#### Verksamhets- och säkerhetsbetydelse
+Obehöriga kan manipulera en kaka och därmed eskalera sina behörigheter och komma åt känslig data och funktioner. Detta kan dessutom ske utan att gå via inloggningsfunktionen med hjälp av ett systemskal.
+#### Rekommendation
+Prioritet: Omgående. Detta är en kritisk sårbarhet.
+DevOps/utvecklingsteamet måste flytta sessions- och behörighetshanteringen från klientsidan till servern, och införa användarverifiering vid varje anrop.
+
+### Exponerad attackyta
+Stora delar av företagets miljö är lättåtkomlig utifrån. Detta dessutom utan tillräcklig kontroll av indatan.
+#### Evidens
+Genom att anropa webbtjänsten från ett systemskal med verktyget *curl* och manipulera ett värde i en kaka kunde vi exekvera kommandon direkt på servern. Vi kunde se interna filer och eskalera våra privilegier.
+#### Verksamhets- och säkerhetsbetydelse
+En angripare kan ansluta från utsidan av företagets nätverk och ta över servern. Detta kan leda till bland annat driftstopp, ekonomiska förluster och dataläckage.
+Se [lessons-learned.md](./lessons-learned.md).
+#### Rekommendation
+Prioritet: Omgående.
+DevOps och driftansvariga måste begränsa synligheten och åtkomsten för känsliga delar av webbtjänsten. Det ska krävas VPN eller IP-vitlistning för att komma åt dessa delar. Administrationsverktyget som använts måste byggas om så att det inte kommer åt serverns system.
 ---
 ## 5. KPI:er och ledningsrapportering
 Sammanfatta de tre KPI:erna från [`kpi.md`](./kpi.md). Beskriv:
