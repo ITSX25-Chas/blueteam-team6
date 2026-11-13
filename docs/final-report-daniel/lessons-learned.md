@@ -11,7 +11,9 @@ Gruppen jobbade tillsammans. Jag gjorde flera delar individuellt utan hjälp fr�
 - Efter instruktioner av utbildaren under Blue Team skrev jag en kommandorad med en payload för att köra kommandon på målservern.
 - Efter en mindre knuff i rätt riktning av Malcolm kunde jag hitta information om Privilege Escalation och läsa den sista flaggan som var dold i en lässkyddad fil.
 När det gäller de lärdomar jag skrivit om i det här dokumentet så stod jag för inloggningen som admin, inloggningen som användare som inte var admin (byggt på Simons upptäckter), tillvägagångssättet att använda administrationsverktyget och kak-manipulationen i lärdom 3.
+
 ---
+
 ## Lesson learned 1
 ### Observation
 SQL Injection i inloggningen. Vem som helst kan logga in som admin utan giltigt lösenord genom att injicera SQL-kod i lösenordsfältet.
@@ -23,7 +25,9 @@ Att någon utan vidare kan logga in som administratör är oerhört allvarligt o
 Inför indatavalidering i inloggningsformuläret samt parametriserade frågor i SQL-anropet.
 ### Uppföljning
 Företaget bör utföra penetrationstester med jämna mellanrum, och framför allt utföra ett test när åtgärder vidtagits för att hindra otillåten inloggning.
+
 ---
+
 ## Lesson learned 2
 ### Observation
 Command Injection i administrationsverktyg. Om en obehörig kommer åt verktyget så kan den personen komma åt systemets insida, antingen via hemsidan eller med terminalverktyg. Vi lyckades exekvera serverkommandon genom verktyget med hjälp av specialtecken.
@@ -35,7 +39,9 @@ En angripare kan komma åt data och manipulera serverns system genom Remote Code
 Indatavalidering. Verktygets enda funktion är att pinga IP-adresser. Därför behöver användare inte kunna använda specialtecken utöver punkt och kolon. Verktyget behöver inte heller kommunicera med systemet direkt. Istället bör säkra API:er användas, om det inte finns väldigt goda skäl att inte göra det.
 ### Uppföljning
 Åtgärder bör utföras och bedömas omgående. Därefter bör verktyget testas årligen samt vid uppdateringar och ändringar.
+
 ---
+
 ## Lesson learned 3
 ### Observation
 Broken Access Control. Privilegieeskalering genom manipulering av kakor. En inloggad användare med låga privilegier kan ändra sin roll till admin och få tillgång till det en admin kommer åt. En ej inloggad användare kan skicka modifierade kak-värden till servern och kringå inloggning.
@@ -47,7 +53,9 @@ Att obehöriga kan få samma rättigheter som admin äventyrar hela systemets in
 Lagra inte känsliga roller eller behörigheter i klientens kakor. Verifiera användarens behörigheter vid varje anrop. Inför strikt auktorisering på alla känsliga endpoints. Sessioner körs enbart på servern där de lättare kan kontrolleras.
 ### Uppföljning
 Inför automatiserade säkerhetstester i CI/CD-pipelinen. Granska regelbundet hur sessioner och behörigheter hanteras på servern.
+
 ---
+
 ## Professionell sammanfattning
 När vi genomförde vårt penetrationstest mot företagets hemsida undersökte vi motståndskraften i inloggningssystemet, om en obehörig användare kan ta sig runt i systemet vid ett intrång, och hur skyddade eventuella känsliga filer och uppgifter var.
 Företagets webbtjänst uppvisar omfattande och kritiska brister, men vi bedömde att följande tre sårbarheter har högst prioritet:
@@ -56,7 +64,9 @@ Företagets webbtjänst uppvisar omfattande och kritiska brister, men vi bedömd
 - Det går att komma åt servern och köra kod på den även utan att vara inloggad.
 Dessa sårbarheter måste åtgärdas omgående för att förhindra att utomstående får tillgång till företagets system. Om det sker riskerar företaget att läcka eller förlora känslig data, förlora tillgången till sina egna system, och att tjänsten som företaget erbjuder blir otillgänglig. Förutom de ekonomiska förlusterna kan detta komma att resultera i försämrat rykte och tillit från företagets kunder. Det finns även regulatoriska ramverk som företaget kan bedömas ha misslyckats följa.
 Det som måste göras omedelbart är att flytta autentiseringen från klientens enheter till företagets server. Servern måste verifiera användarens identitet vid varje känslig aktivitet. Detta måste göras för att hindra att utomstående får tillgång till systemet. Därefter bör administrationsverktyget göras om så att det inte har möjlighet att köra kod på servern.
+
 ---
+
 ## Kontroll före commit
 - [x] Jag har avgränsat vilket intrångsförsök eller vilken incident mitt post-
 mortem gäller.

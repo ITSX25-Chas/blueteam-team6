@@ -97,6 +97,15 @@ Sammanfatta de tre KPI:erna från [`kpi.md`](./kpi.md). Beskriv:
 - eventuella begränsningar i data eller tolkning.
 Du behöver inte upprepa alla fullständiga definitioner från `kpi.md`.
 
+#### Säkerhetsefterlevnad i infrastruktur
+Visar hur väl företagets system följer etablerade standarder och interna säkerhetskrav. Kan berätta om delar av ett system inte lever upp till kraven och behöver förbättras. Visar endast hur systemet är uppsatt när koden pushas. Förlorar i värde om systemet senare ändras utan att gå igenom granskningar.
+
+#### Säkerhetsloggning och övervakning
+Ger en bild av vad som övervakas och vilka händelser som loggas. Talar om ifall hotbilden ökar genom ökad loggintesitivitet, förutsatt att systemet i övrigt är säkert. Utan tillräcklig loggning är det svårt att upptäcka incidenter. Kan kombineras med automatiska larm och skyddsåtgärder. Kan dock logga för mycket så att det kritiska försvinner i mängden.
+
+#### Publika och exponerade molnresurser
+Ger en bild av företagets externa attackyta, det vill säga de delar av systemet som är mest utsatta. De resurser som är exponerade måste skyddas och säkras upp. De exponerade resurserna är ofta vägen in för angripare. Ju färre osäkra resurser det finns desto mindre risk att angrepp lyckas.
+
 ---
 
 ## 6. Incidentrespons, post-mortem och förbättringsarbete
@@ -110,6 +119,7 @@ Beskriv:
 - hur förbättringarna bör följas upp.
 Fokusera på vad organisationen behöver lära sig och förändra, inte bara på
 händelseförloppet.
+
 
 ---
 
