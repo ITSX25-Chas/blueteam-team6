@@ -109,45 +109,54 @@ Ger en bild av företagets externa attackyta, det vill säga de delar av systeme
 ---
 
 ## 6. Incidentrespons, post-mortem och förbättringsarbete
-Sammanfatta de viktigaste slutsatserna från [`lessons-learned.md`](./lessons-
-learned.md).
-Beskriv:
-- vilket verkligt eller simulerat intrångsförsök som analyserades,
-- hur incidenten upptäcktes och hanterades,
-- de viktigaste orsakerna och konsekvenserna,
-- vilka förbättringar som bör genomföras,
-- hur förbättringarna bör följas upp.
-Fokusera på vad organisationen behöver lära sig och förändra, inte bara på
-händelseförloppet.
-
+I penetrationstestet granskade vi bland annat hanteringen av inlogg, behörigheter och least privilege. Det mest kritiska vi hittade var att det inte fanns några hinder att komma åt systemet utifrån. Det finns flera sätt att göra detta på.
+De tre största sårbarheterna är att sessionerna och identiteten hanteras hos klienten, att inloggningsfunktionen går kringå för lätt, och att det går komma åt ett verktyg utifrån utan någon identitetskontroll. Den fjärde största sårbarheten är att administrationsverktyget kan användas för att exekvera kod på servern. Tillsammans gör dessa sårbarheter att systemet är väldigt känsligt för yttre påverkan. Det kan leda till dataförluster och att företaget tappar kontrollen över systemet.
+Det första som måste göras är att åtgärda åtkomsten. Inloggningsverktyget måste bli strikt och hindras från att göra SQL-anrop. Sessionerna måste flyttas från klienten till servern. Sedan bör företaget se över administrationsverktyget. Om det finns skäl att tillåta åtkomst utifrån, med korrekt identitetshantering, så ska verktyget inte tillåtas köra kod på servern.
+Åtgärderna för att stänga åtkomsten för obehöriga måste genomföras omgående, och följas upp så fort de införts. Administrationsverktyget bör kopplas ifrån tills beslut tagits om det ska gå att nå utifrån, eller tills det byggts om och inte längre har rätt att köra kod på servern.
+I fortsättningen rekommenderas företaget att implementera automatiska säkerhetsskanningar i CI/CD-flödet så att kritiska sårbarheter upptäcks och hindras från att komma i produktion.
 
 ---
 
 ## 7. AI i säkerhetsarbetet
-Beskriv och värdera din användning av generativa AI-assistenter och AI-assisterade
-säkerhetsverktyg i projektets arbetsflöde.
+Beskriv och värdera din användning av generativa AI-assistenter och AI-assisterade säkerhetsverktyg i projektets arbetsflöde.
 ### Konkreta användningsfall
-[Vilka verktyg använde du, i vilka arbetsmoment och för vilket syfte? Ge konkreta
-exempel.]
+Gemini för att lära mig mer om KPI:er.
 ### När AI var lämpligt
-[Beskriv minst ett konkret tillfälle där AI tillförde värde. Förklara varför AI var
-lämpligt och vilken nytta användningen gav.]
+I mitt fall var det en enkel utväg för att förstå KPI:er bättre. Jag hittade ett par artiklar med förslag på flera KPI:er som jag tyckte passade, och bad om en förklaring av några stycken.
 ### När AI var olämpligt eller otillräckligt
-[Beskriv minst ett konkret tillfälle där AI inte borde användas ensamt, eller där
-användningen krävde särskild försiktighet.]
+Jag har försökt använda AI fyra gånger under utbildningens gång. Den här uppgiften var den fjärde.
+Den första var i en tidigare kurs där jag på grund av yttre omständigheter behövde få ihop något fort. Det blev inte bra, och jag var inte nöjd. Jag försökte faktakolla det jag fick, men trots att jag inte hittade det som AI:n påstod så använde jag det för att jag kände att jag inte hade tid.
+Andra gången var i en tidigare kurs där vi satte upp en enklare AI-skanning i Wazuh. Det är ett bra användningsområde.
+Den tredje gången var under Blue Team-delen av denna kurs. Då satt jag i drygt tre timmar och gick i cirklar med att försöka hitta en flagga med hjälp av AI innan jag gav upp.
+AI bör inte användas under tidspress, för det tar tid att kontrollera uppgifterna och göra ändringar. Det måste ifrågasättas hela tiden. Jag anser att jag oftast hittar korrekt information snabbare på egen hand än med "hjälp" av en AI.
 ### Verifiering och mänsklig kontroll
-[Hur kontrollerade du AI-genererade förslag, analyser, kod eller slutsatser? Vilka
-oberoende källor eller tester använde du?]
+Jag gick igenom det AI:n påstod, och jämförde noga med artiklarna jag hittat så att det verkligen stämde överens. Om någonting hade skilt mellan artikeln och vad AI:n påstod, så hade jag gått på artikeln.
 ### Risker och professionella gränser
-[Resonera om exempelvis hallucinationer, felaktiga säkerhetsråd,
-informationsläckage, bias, bristande spårbarhet, upphovsrätt eller övertro på
-resultat.]
+Båda de tidigare gångerna jag använt AI under utbildningen så har den hallucinerat. Den har påstått saker som jag enkelt kan se är felaktigt.
+Jag vet inte säkert, men det är väldigt troligt att flera i klassen tyvärr inte granskar det de får av en AI. Det är även möjligt att de har lagt upp hela infrastrukturkoden i en AI, och i det läget kan känslig data ha läckt.
+Man kan säga att AI är ett bra verktyg om det används på rätt sätt, men det är väldigt svårt att hålla sig inom "rätt" gräns. Däremot är det lätt att bara slänga in en prompt och ta det man får tillbaka.
+
 ### Professionell slutsats
-[Formulera principer för hur du skulle använda, begränsa eller avstå från AI i
-motsvarande yrkesmässigt säkerhetsarbete.]
-**Viktigt:** En verktygslista räcker inte. Du ska självständigt motivera när AI är
-lämpligt eller olämpligt och visa hur du säkerställde kvalitet och ansvar.
-**Omfattning:** cirka 400–600 ord.
+AI har i en tidigare kurs varit ett väldigt användbart verktyg i cybersäkerhet, specifikt när vi tränade en enklare AI att upptäcka avvikelser i nätverkstrafik. Skanningen kunde upptäcka händelser snabbt och antingen larma eller avvärja eventuella hot.
+I övrigt har mitt användningsområde bestått av chatt-bottar, och för mig har det inte fungerat bra att använda AI. Svaren jag fått från dem har inte varit användbara. Jag gissar att orsaken är en blandning av att jag inte promptar på rätt sätt, och att AI har inbyggda säkerhetsramar som hindrar vissa svar när det handlar om känsliga ämnen som cybersäkerhet. AI-bolagen har ett ansvar att inte lära ut hacking på ett skadligt sätt.
+
+#### AI för automation och kodstöd
+Automatiska AI-skanningar kan hjälpa till att säkra system. Utan dessa måste människor kontrollera loggar med jämna mellanrum, och därefter reagera på incidenter. En AI kan automatiskt blockera trafik och låsa ner system om det ser ut som att ett angrepp pågår. Det minskar responstiden och den mänskliga faktorn.
+Människor bör fortfarande kontinuerligt granska AI:n för att säkerställa att den håller sig inom bestämda ramar.
+
+Att använda chatt-bottar som Gemini, ChatGPT, Claude och Copilot som stöd när man till exempel skriver kod, stavningskontroll, och behöver enklare vägledning är även det lämpliga användningsområden.
+
+#### AI och känslig data
+AI ska aldrig användas för att hantera känslig data. Det kan vara personuppgifter, lösenord, säkerhetsnycklar och liknande. Vi som användare har ingen kontroll eller översikt över var sådan data tar vägen efter att en AI får tag i den. Den kan användas för att träna AI, eller användas av AI-bolaget på ett otillåtet sätt.
+
+Om man använder AI till att skriva kod finns även en risk att man hårdkodar in nycklar och lösenord i kod som sedan blir publik. Det är viktigt att lära sig hur man använder säkerhetshantering med till exempel GitHubs Secrets Management.
+
+#### Kvalitetssäkring och ansvar
+Om man använder chatt-bottar så måste man granska precis allt. Om en AI påstår någonting, gör en sökning på det och dubbelkolla. Det är okej att inte kunna en sak, men när en AI säger något så vet du vad du ska lära dig mer om utanför AI. Det är väldigt vanligt att AI hittar på saker om den inte kan svaret. Som användare vet du inte om det du får ut stämmer eller inte. Chatt-bottar skriver även ofta fel i kod, och det kan vara besvärligt att felsöka när det inte är du själv som skrivit koden.
+
+När det gäller automatiska verktyg så är det viktigt att granska resultat med jämna mellanrum. Om verktyget tränas kontinuerligt så finns det en risk att en angripare långsamt ökar trafiken, och att verktyget då tror att det är normalt och inte larmar. Det kan även behöva justeras för trafik som är ovanlig men påvisat säker. Det måste alltid finnas en människa som tar besluten.
+
+I båda fallen är det viktigt att komma ihåg att allt ansvar för det som levereras till kund eller företagsledning ligger på den som levererar, och då även ansvaret för att arbetet är kvalitetssäkrat.
 
 ---
 
@@ -163,19 +172,45 @@ För varje rekommendation ska det framgå:
 Undvik en lång önskelista. Fokusera på åtgärder med tydlig säkerhets- och
 verksamhetseffekt.
 
+#### Prioritet 1: Åtgärda att inloggningen går kringgå
+I nuläget går det att logga in som admin med en enkel SQL-injektion. Inloggningen är oerhört osäker. Det gör företaget sårbart för intrång från inte bara främmande makt och hacker-grupper, utan även från ungdomar som leker runt oansvarigt och kan orsaka skada.
+
+Utvecklarna måste omedelbart införa indatavalidering i inloggningsformuläret och parametriserade frågor i SQL-anropet.
+
+Det här är en så pass kritisk sårbarhet att det inte går vänta, det måste göras nu.
+
+#### Prioritet 2: Flytta sessions- och identitetshanteringen till serversidan
+Servern litar på att det klienten påstår stämmer utan verifiering. Det gör så att klienten kan manipulera värdet som anger klientens roll, och därmed få behörigheter utan att vara inloggad.
+
+DevOps måste flytta hanteringen av sessioner och identitet från klienten till servern, och införa validering vid varje anrop.
+
+Även detta måste ha högsta prioritet. Det är marginellt svårare att utföra en attack på det här sättet än genom inloggningen då angriparen antingen måste vara inloggad på webbtjänsten eller ha tillgång till vissa endpoints, men det är ändå en kritisk sårbarhet.
+
+#### Prioritet 3: Begränsa administrationsverktygets tillgång till systemet
+Administrationsverktyget är en stor sårbarhet, men av lägre prioritet än de två första. Om de två första punkterna åtgärdas så är det svårare för en angripare att utnyttja sårbarheten i verktyget. Det bör ändå prioriteras högt.
+
+Verktyget ska ändå inte ha möjlighet att exekvera kod mot servern. Vid ett intrång där angriparen får tillgång till verktyget så riskerar företaget att systemet tas över då verktyget möjliggör att skadlig kod körs på servern. Utvecklarna av verktyget måste därför bygga om det så att det istället använder till exempel en API för att utföra sina uppgifter. Om verktyget absolut måste vara kopplat till systemet så behöver det hindras från att exekvera kod. Det ska endast kunna göra den administrative uppgift den är gjord för.
+
 ---
 
 ## 9. Individuell reflektion
 ### Vad kan jag nu som jag inte kunde när kursen började?
-[Ge minst ett konkret exempel.]
+- Jag förstår nu bättre varför behörighetskontroll ska vara på serversidan och inte hos klienten. När man skapar en webbtjänst så ska man inte lita på klienterna. Det har dessutom fått mig att börja kolla på ett gammalt projekt där jag har inloggning, och som jag vill sätta upp igen och testa säkerheten på.
+- Efter att ha läst på om SQL-injektioner så vill jag testa även det på mitt gamla projekt som nyss nämnts.
+
 ### Vilket moment har förändrat mitt sätt att arbeta med cybersäkerhet mest?
 [Förklara varför.]
+Blue Team. Vi fokuserade visserligen mest på att leta flaggor, men målmiljön patchades under tiden och det blev svårare att komma vidare. Det var kul att bli utmanad lite mer varje vecka.
+
 ### Vad skulle jag göra annorlunda om projektet började idag?
-[Koppla svaret till något du faktiskt har upplevt eller lärt dig.]
+Mycket bättre och tydligare dokumentation. Vi tog oss igenom Red Team för snabbt utan att dokumentera ordentligt, och därför saknar vi till exempel dokumentation om när och vad vi gjorde i penetrationstestet. Det leder till en sämre slutrapport.
+
 ### Vad tar jag med mig till LIA och min framtida yrkesroll?
-[Beskriv minst två konkreta saker du kommer att kunna använda.]
-**Omfattning:** cirka 300–500 ord totalt. AI-värderingen görs separat i avsnitt 7
-och behöver inte upprepas här.
+- Det behöver oftast inte gå så fort när man testar och granskar. Det är viktigare att vara noggrann, tydlig och dokumentera allt man gör och allt man hittar. Om man skyndar sig igenom en uppgift så kommer man missa saker. Det märkte vi när vi skulle skriva rapporten till Red Team. Vi saknade dokumentation om när vi utförde attacker och kunde därför inte granska loggarna så väl som i alla fall jag hade önskat.
+- Om utvecklarna eller DevOps slarvar med indatavalidering eller behörigheter så sätts säkerheten helt ur spel nästan direkt. Det har vi sett med inloggningen i först Blue Team och sedan Red Team. Den var lätt att kringå, och anledningen var att formuläret skrevs på ett av (vad jag hittat) två sätt. Sättet som använts i inloggningen ser enklare ut, så det kan vara så att utvecklare skriver inloggningar på det sättet utan att förstå hur det kan utnyttjas. Om vi hamnar på ett företag med utvecklare så bör vi diskutera såna saker med dem.
+- Att kommunicera med ledningsgrupp och klienter är svårt. Då de inte alltid är på samma tekniska nivå som utvecklare eller säkerhetsteamet måste man försöka undvika tekniska termer och istället hålla sig på en enkel nivå. Men man måste ändå få fram poängen så att beställaren förstår, och kunna visa på sårbarheter, risker, åtgärder och vilka resurser som krävs. Det är viktigt både för att kunna säkra upp systemen och för att faktiskt få de resurser som behövs i arbetet.
+- Det är viktigt att lyssna eller läsa och förstå kravspecifikationer och Rules Of Engagement. När det gäller kravspecifikationer så måste man säkerställa att man uppfyller det beställaren vill ha. Har man Rules of Engagement så får man inte gå utanför den, och om man går utanför måste man stoppa direkt.
+- Se till att alltid lära mig någonting nytt. Utvecklingen inom cybersäkerhet går framåt hela tiden, och det är viktigt att hänga med när något förändras. Gör jag mig tillgänglig för extra uppgifter så mycket som möjligt så lär jag mig mer om rollen. Jag kan dessutom få uppgifter som inte hör till rollen, och därför lära mig om andra intressanta saker. Det är viktigt att vara öppen för sådana möjligheter.
 
 ---
 
@@ -186,23 +221,54 @@ Lista de källor du faktiskt har använt, exempelvis:
 - teknisk dokumentation,
 - loggar och projektartefakter,
 - AI-genererat material när det har påverkat analysen eller texten.
-Använd ett konsekvent sätt att ange källorna. Det ska gå att skilja mellan externa
-fakta, projektets evidens, AI-genererade förslag och dina egna bedömningar.
+Använd ett konsekvent sätt att ange källorna. Det ska gå att skilja mellan externa fakta, projektets evidens, AI-genererade förslag och dina egna bedömningar.
+[MITRE ATT&CK](https://attack.mitre.org/)
+Ett ramverk för att förstå hur angripare attackerar system.
+[CWE](https://cwe.mitre.org/index.html)
+Ramverk med kända sårbarheter.
+[CISA: TLP](https://www.cisa.gov/news-events/news/traffic-light-protocol-tlp-definitions-and-usage)
+CISAs förklaring av hur TLP fungerar.
+
+[LinkedIn: Cloud Security Key Performance Indicators...](https://www.linkedin.com/pulse/cloud-security-key-performance-indicators-kpis-risk-kris-singh-4jtkc/)
+En artikel om KPI:er som jag tyckte hjälpte mycket.
+[Reddit: What KPIs have you found to be useful...](https://www.reddit.com/r/cybersecurity/comments/16a5dqr/what_kpis_have_you_found_to_be_useful_when/)
+Reddit-tråd med förslag på KPI:er.
+[Trustview: Compliance-KPI:er](https://trustview.se/akademi/compliance-kpier/)
+Sida med förklaringar av KPI:er på svenska.
+
+[SQL injection - Authentication](https://medium.com/@elkassimiabderrahmane2001/sql-injection-authentication-21caedf5e4cb)
+En artikel som förklarar SQL-injektioner.
+[SQL injection](https://developer.mozilla.org/en-US/docs/Glossary/SQL_Injection)
+En artikel som förklarar SQL-injektioner.
+[W3: Prevent SQL Injection](https://www.w3schools.com/sql/sql_parameterized_queries.asp)
+Artikel som visar hur man förhindrar SQL-injektioner.
+
+[kpi.md](./kpi.md)
+KPI:erna jag har valt ut.
+[lessons-learned.md](./lessons-learned.md)
+Lärdomar från projektet.
+[RedTeam6.pdf](./RedTeam6.pdf)
+Teamets rapport från Red Team.
+
+Källor och referenser utan länk eller utanför GitHub-repot:
+Blue Team-rapporten för Team 6
+Tidigare utbildare har visat hur man bygger ett kommando med en payload.
+Malcolm tipsade om att modifiera kakorna.
 
 ---
 
 ## Slutkontroll
-- [ ] Jag har tydligt beskrivit mitt eget bidrag och länkat till relevant underlag.
-- [ ] Mina viktigaste resultat stöds av evidens och källor.
-- [ ] Mina KPI:er är anpassade för en icke-teknisk beslutsfattare.
-- [ ] Mitt post-mortem leder till konkreta förbättringar och uppföljning.
-- [ ] Jag har beskrivit konkret AI-användning och självständigt värderat när AI är
+- [x] Jag har tydligt beskrivit mitt eget bidrag och länkat till relevant underlag.
+- [x] Mina viktigaste resultat stöds av evidens och källor.
+- [x] Mina KPI:er är anpassade för en icke-teknisk beslutsfattare.
+- [x] Mitt post-mortem leder till konkreta förbättringar och uppföljning.
+- [x] Jag har beskrivit konkret AI-användning och självständigt värderat när AI är
 lämpligt eller olämpligt.
-- [ ] Jag har beskrivit hur AI-genererade resultat verifierades.
-- [ ] Mina rekommendationer följer av analysen och är prioriterade.
-- [ ] Den professionella sammanfattningen fungerar fristående.
-- [ ] Min individuella reflektion innehåller konkreta exempel.
-- [ ] Källor, länkar och referenser fungerar.
-- [ ] Inga lösenord, tokens, API-nycklar, personuppgifter eller andra skyddsvärda
+- [x] Jag har beskrivit hur AI-genererade resultat verifierades.
+- [x] Mina rekommendationer följer av analysen och är prioriterade.
+- [x] Den professionella sammanfattningen fungerar fristående.
+- [x] Min individuella reflektion innehåller konkreta exempel.
+- [x] Källor, länkar och referenser fungerar.
+- [x] Inga lösenord, tokens, API-nycklar, personuppgifter eller andra skyddsvärda
 uppgifter finns i repositoryt.
-- [ ] Alla ändringar är committade och pushade till GitHub.
+- [x] Alla ändringar är committade och pushade till GitHub.
