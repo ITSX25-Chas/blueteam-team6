@@ -5,32 +5,34 @@
 
 ---
 
-## Syfte och kursmål
-I rapporten ska du sammanställa projektets resultat och dina egna reflektioner för en fiktiv ledningsgrupp. Du ska omsätta tekniskt säkerhetsarbete till mätbar
-uppföljning, förbättringsarbete och prioriterade rekommendationer. Du ska också
-värdera när AI är lämpligt eller olämpligt i professionellt säkerhetsarbete.
-Rapporten knyter an till:
-- **Kursmål 4:** säkerhetsmätningar, KPI:er och compliance-rapportering till
-ledningsnivå.
-- **Kursmål 9:** incidentrespons, post-mortem och förbättringsarbete.
-- **Kursmål 10:** KPI-rapportering för en icke-teknisk beslutsfattare.
-- **Kursmål 11:** integrerad användning och professionell värdering av generativ AI och AI-assisterade säkerhetsverktyg.
-- **Kursmål 13:** självständigt leda och leverera ett komplext säkerhetsprojekt med kvalitet, dokumentation och professionell kommunikation.
-Bedömningen utgår från målgruppsanpassning, källanvändning, struktur, motivering
-och din förmåga att visa förståelse för helheten.
+## 1. Professionell sammanfattning
+Projektets syfte var att testa webbtjänstens motståndskraft mot intrång och manipulering. Resultatet visade kritiska brister i säkerheten som måste åtgärdas.
+
+Vi upptäckte bland annat:
+- Inloggningsfunktionen är osäker.
+- Rättighetshanteringen ligger hos användaren.
+- Verktyg har tillgång till känsliga delar av systemet.
+
+Den största sårbarheten finns i inloggningsfunktionen, där en medelmåttigt kompetent angripare kan ta sig in på bara några sekunder. Risken är väldigt hög och funktionen måste omedelbart korrigeras enligt rapporten för att förhindra intrång och skada.
+
+En liknande kritisk sårbarhet är att en obehörig eller inloggad användare kan öka sina egna privilegier och därmed få tillgång till skyddade delar av systemet. Om angripare får tillgång på det sättet så kommer de åt ett administrationsverktyg.
+
+Detta verktyg ger oavsiktligt administratörerna, och angripare som kommer åt det, möjlighet att ta över systemet.
+
+Dessa tre sårbarheter innebär en hög risk för intrång och påföljande problem. Det är viktigt att genast åtgärda i alla fall de två första, då det skulle säkra upp systemet tillräckligt för att ge företaget tid att bygga om verktyget.
 
 ---
 
-## 1. Professionell sammanfattning
-Skriv rapportens sammanfattning sist, men placera den först. Den ska kunna läsas
-fristående av exempelvis en CISO, IT-chef, systemägare eller ledningsgrupp.
-Sammanfatta:
-- projektets syfte och viktigaste resultat,
-- mest betydelsefulla risker och förbättringsområden,
-- vad KPI:erna visar eller bör följa upp,
-- viktigaste rekommendationerna,
-- vilka beslut eller prioriteringar som behövs.
-**Omfattning:** cirka 200–300 ord.
+De viktigaste KPI:erna enligt min bedömning är:
+- Säkerhetsefterlevnad i infrastruktur
+- Säkerhetsloggning och övervakning
+- Publika och exponerade molnresurser
+
+Det finns olika ramverk och branschstandarder, och företagets egna policies, att förhålla sig till för att driva företaget på ett säkert sätt. I nuläget når inte företaget upp till alla krav. Målsättningen bör vara att nå 100% efterlevnad, och om efterlevnaden sjunker för lågt ska insatser sättas in.
+
+I nuläget är övervakningen av systemet undermålig. Det finns inte heller några automatiska larm. Om det inträffar en incident så är det inte säkert att företaget blir medvetet förrän någon läser loggarna. Företaget bör sträva efter att införa automatiska larm så att de som ansvarar för säkerheten får veta direkt när någonting händer.
+
+Företagets molnmiljöer syns för tydligt på internet. Det gör att angripare hittar dessa resurser lättare. Resurserna behöver döljas, och om personalen behöver tillgång så ska det endast ske via en säker anslutning.
 
 ---
 
@@ -89,14 +91,6 @@ DevOps och driftansvariga måste begränsa synligheten och åtkomsten för käns
 ---
 
 ## 5. KPI:er och ledningsrapportering
-Sammanfatta de tre KPI:erna från [`kpi.md`](./kpi.md). Beskriv:
-- vilka KPI:er du valde,
-- hur de kommunicerar säkerhetsstatus,
-- varför de är relevanta för en icke-teknisk beslutsfattare,
-- vilka beslut eller prioriteringar de kan stödja,
-- eventuella begränsningar i data eller tolkning.
-Du behöver inte upprepa alla fullständiga definitioner från `kpi.md`.
-
 #### Säkerhetsefterlevnad i infrastruktur
 Visar hur väl företagets system följer etablerade standarder och interna säkerhetskrav. Kan berätta om delar av ett system inte lever upp till kraven och behöver förbättras. Visar endast hur systemet är uppsatt när koden pushas. Förlorar i värde om systemet senare ändras utan att gå igenom granskningar.
 
@@ -118,7 +112,6 @@ I fortsättningen rekommenderas företaget att implementera automatiska säkerhe
 ---
 
 ## 7. AI i säkerhetsarbetet
-Beskriv och värdera din användning av generativa AI-assistenter och AI-assisterade säkerhetsverktyg i projektets arbetsflöde.
 ### Konkreta användningsfall
 Gemini för att lära mig mer om KPI:er.
 ### När AI var lämpligt
@@ -127,7 +120,7 @@ I mitt fall var det en enkel utväg för att förstå KPI:er bättre. Jag hittad
 Jag har försökt använda AI fyra gånger under utbildningens gång. Den här uppgiften var den fjärde.
 Den första var i en tidigare kurs där jag på grund av yttre omständigheter behövde få ihop något fort. Det blev inte bra, och jag var inte nöjd. Jag försökte faktakolla det jag fick, men trots att jag inte hittade det som AI:n påstod så använde jag det för att jag kände att jag inte hade tid.
 Andra gången var i en tidigare kurs där vi satte upp en enklare AI-skanning i Wazuh. Det är ett bra användningsområde.
-Den tredje gången var under Blue Team-delen av denna kurs. Då satt jag i drygt tre timmar och gick i cirklar med att försöka hitta en flagga med hjälp av AI innan jag gav upp.
+Den tredje gången var under Blue Team-delen av denna kurs. Då satt jag i drygt tre timmar och gick i cirklar med att försöka hitta en flagga med hjälp av AI innan jag gav upp. Flaggan hittades senare med en helt annan metod än vad AI:n hade föreslagit.
 AI bör inte användas under tidspress, för det tar tid att kontrollera uppgifterna och göra ändringar. Det måste ifrågasättas hela tiden. Jag anser att jag oftast hittar korrekt information snabbare på egen hand än med "hjälp" av en AI.
 ### Verifiering och mänsklig kontroll
 Jag gick igenom det AI:n påstod, och jämförde noga med artiklarna jag hittat så att det verkligen stämde överens. Om någonting hade skilt mellan artikeln och vad AI:n påstod, så hade jag gått på artikeln.
@@ -161,17 +154,6 @@ I båda fallen är det viktigt att komma ihåg att allt ansvar för det som leve
 ---
 
 ## 8. Prioriterade rekommendationer
-Prioritera ett begränsat antal åtgärder utifrån projektresultat, KPI:er och post-
-mortem.
-För varje rekommendation ska det framgå:
-- vad som bör göras,
-- varför det bör göras,
-- vilken risk eller möjlighet rekommendationen adresserar,
-- föreslagen prioritet,
-- vem eller vilken funktion som bör äga nästa steg.
-Undvik en lång önskelista. Fokusera på åtgärder med tydlig säkerhets- och
-verksamhetseffekt.
-
 #### Prioritet 1: Åtgärda att inloggningen går kringgå
 I nuläget går det att logga in som admin med en enkel SQL-injektion. Inloggningen är oerhört osäker. Det gör företaget sårbart för intrång från inte bara främmande makt och hacker-grupper, utan även från ungdomar som leker runt oansvarigt och kan orsaka skada.
 
@@ -199,7 +181,6 @@ Verktyget ska ändå inte ha möjlighet att exekvera kod mot servern. Vid ett in
 - Efter att ha läst på om SQL-injektioner så vill jag testa även det på mitt gamla projekt som nyss nämnts.
 
 ### Vilket moment har förändrat mitt sätt att arbeta med cybersäkerhet mest?
-[Förklara varför.]
 Blue Team. Vi fokuserade visserligen mest på att leta flaggor, men målmiljön patchades under tiden och det blev svårare att komma vidare. Det var kul att bli utmanad lite mer varje vecka.
 
 ### Vad skulle jag göra annorlunda om projektet började idag?
@@ -215,13 +196,6 @@ Mycket bättre och tydligare dokumentation. Vi tog oss igenom Red Team för snab
 ---
 
 ## 10. Källor och referenser
-Lista de källor du faktiskt har använt, exempelvis:
-- standarder och ramverk,
-- kursmaterial,
-- teknisk dokumentation,
-- loggar och projektartefakter,
-- AI-genererat material när det har påverkat analysen eller texten.
-Använd ett konsekvent sätt att ange källorna. Det ska gå att skilja mellan externa fakta, projektets evidens, AI-genererade förslag och dina egna bedömningar.
 [MITRE ATT&CK](https://attack.mitre.org/)
 Ett ramverk för att förstå hur angripare attackerar system.
 [CWE](https://cwe.mitre.org/index.html)
