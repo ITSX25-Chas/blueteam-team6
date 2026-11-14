@@ -2,10 +2,10 @@
 
 ## Händelse och avgränsning
 Jag har valt att fokusera på åtkomstkontroll, behörigheter och kodexekvering.
-I vårt penetrationstest tog vi oss in i företagets system via hemsidan. Efter det använde vi oss av administrationsverktyget för att exekvera kod på företagets server. Vi lyckades även injicera kod med högre privilegier genom ett Linux-skal.
+I vårt penetrationstest tog vi oss in i företagets system via hemsidan. Efter det använde vi oss av administrationsverktyget för att exekvera kod på företagets server. Vi lyckades även injicera kod med högre privilegier genom ett Linux-skal.  
 I vårt test påverkades hemsidan, serverns infrastruktur och databasen med användardata. Vi undersökte och utforskade utan att göra någon skada.
-Under delen av kursen som hanterade Blue Team fick vi grundläggande kunskaper i SQL-injektioner och hur man kan använda verktyget *curl* för att anropa en server.
-Gruppen jobbade tillsammans. Jag gjorde flera delar individuellt utan hjälp från övriga i gruppen, även om de hade gjort det steget innan mig.
+Under delen av kursen som hanterade Blue Team fick vi grundläggande kunskaper i SQL-injektioner och hur man kan använda verktyget *curl* för att anropa en server.  
+Gruppen jobbade tillsammans. Jag gjorde flera delar individuellt utan hjälp från övriga i gruppen, även om de hade gjort det steget innan mig.  
 - Jag loggade in med SQL-injektionen.
 - Med administrationsverktyget hittade jag den dolda filen med flagga tre.
 - Efter instruktioner av utbildaren under Blue Team skrev jag en kommandorad med en payload för att köra kommandon på målservern.
@@ -57,12 +57,12 @@ Inför automatiserade säkerhetstester i CI/CD-pipelinen. Granska regelbundet hu
 ---
 
 ## Professionell sammanfattning
-När vi genomförde vårt penetrationstest mot företagets hemsida undersökte vi motståndskraften i inloggningssystemet, om en obehörig användare kan ta sig runt i systemet vid ett intrång, och hur skyddade eventuella känsliga filer och uppgifter var.
+När vi genomförde vårt penetrationstest mot företagets hemsida undersökte vi motståndskraften i inloggningssystemet, om en obehörig användare kan ta sig runt i systemet vid ett intrång, och hur skyddade eventuella känsliga filer och uppgifter var.  
 Företagets webbtjänst uppvisar omfattande och kritiska brister, men vi bedömde att följande tre sårbarheter har högst prioritet:
 - Obehöriga kan enkelt logga in som administratör på hemsidan.
 - Administrationsverktyget på hemsidan tillåter alla som har tillgång till verktyget att köra kod direkt på servern.
 - Det går att komma åt servern och köra kod på den även utan att vara inloggad.
-Dessa sårbarheter måste åtgärdas omgående för att förhindra att utomstående får tillgång till företagets system. Om det sker riskerar företaget att läcka eller förlora känslig data, förlora tillgången till sina egna system, och att tjänsten som företaget erbjuder blir otillgänglig. Förutom de ekonomiska förlusterna kan detta komma att resultera i försämrat rykte och tillit från företagets kunder. Det finns även regulatoriska ramverk som företaget kan bedömas ha misslyckats följa.
+Dessa sårbarheter måste åtgärdas omgående för att förhindra att utomstående får tillgång till företagets system. Om det sker riskerar företaget att läcka eller förlora känslig data, förlora tillgången till sina egna system, och att tjänsten som företaget erbjuder blir otillgänglig. Förutom de ekonomiska förlusterna kan detta komma att resultera i försämrat rykte och tillit från företagets kunder. Det finns även regulatoriska ramverk som företaget kan bedömas ha misslyckats följa.  
 Det som måste göras omedelbart är att flytta autentiseringen från klientens enheter till företagets server. Servern måste verifiera användarens identitet vid varje känslig aktivitet. Detta måste göras för att hindra att utomstående får tillgång till systemet. Därefter bör administrationsverktyget göras om så att det inte har möjlighet att köra kod på servern.
 
 ---
